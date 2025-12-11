@@ -333,13 +333,16 @@ const SalesTracker = ({ user, profile, onLogout }) => {
     return `${year}-${month}-${day}`;
   };
 
-  // Load data on mount
+// Load data on mount and when switching to team view
   useEffect(() => {
     loadUserData();
-    if (isOwner) {
+  }, []);
+
+  useEffect(() => {
+    if (isOwner && teamView) {
       loadTeamData();
     }
-  }, []);
+  }, [teamView]);
 
   useEffect(() => {
     setAnimateIn(false);
